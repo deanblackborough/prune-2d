@@ -55,3 +55,10 @@ The ability to create a game, including but not limited to....
 
 ## Uses
 [Project Template by Cherno](https://github.com/TheCherno/ProjectTemplate)
+- SDL
+- entt
+- glm
+- lua
+- imgui
+- sol
+- spdlog
