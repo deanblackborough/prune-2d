@@ -52,3 +52,6 @@ The ability to create a game, including but not limited to....
 - Game settings
 - Game editor
 - Do anything with user input other than exit
+
+## Uses
+[Project Template by Cherno](https://github.com/TheCherno/ProjectTemplate)
