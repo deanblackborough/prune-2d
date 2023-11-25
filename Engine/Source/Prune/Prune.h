@@ -24,11 +24,11 @@ namespace Prune {
 
         const char* m_EngineName;
 
-        int m_WindowWidth = 800;
-        int m_WindowHeight = 600;
+        int m_WindowWidth = 1200;
+        int m_WindowHeight = 800;
 
-        int m_LogicalWindowWidth = 800;
-        int m_LogicalWindowHeight = 600;
+        int m_LogicalWindowWidth = 1200;
+        int m_LogicalWindowHeight = 800;
 
         SDL_Window* m_Window = nullptr;
         SDL_Renderer* m_Renderer = nullptr;
