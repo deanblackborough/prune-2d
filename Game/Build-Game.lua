@@ -1,7 +1,7 @@
-project "App"
+project "Game"
    kind "ConsoleApp"
    language "C++"
-   cppdialect "C++20"
+   cppdialect "C++latest"
    targetdir "Binaries/%{cfg.buildcfg}"
    staticruntime "off"
 
@@ -11,13 +11,13 @@ project "App"
    {
       "Source",
 
-	  -- Include Core
-	  "../Core/Source"
+	  -- Include Engine
+	  "../Engine/Source"
    }
 
    links
    {
-      "Core"
+      "Engine"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")

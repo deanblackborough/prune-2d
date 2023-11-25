@@ -1,24 +1,54 @@
-# C++ Project Starter Template
+![This is the logo](Engine/Assets/logo-64.png)
 
-This is a little quick-start project template for C++ projects which utilise a Core/App project architecture. There are two included projects - one called _Core_, and one called _App_. [Premake](https://github.com/premake/premake-core) is used to generate project files.
+## What?
 
-Core builds into a static library and is meant to contain common code intended for use in multiple applications. App builds into an executable and links the Core static library, as well as provides an include path to Core's code.
+Prune2D may one day become a simple 2D game engine, for now it is a fun project.
 
-The `Scripts/` directory contains build scripts for Windows and Linux, and the `Vendor/` directory contains Premake binaries (currently version `5.0-beta2`).
+I'm playing with C++ and figured a great way learn the language would be building a 2d game engine ;). As well as learning and using C++ in anger, I'm primarily going to use Prune2D to teach my kids how to code and build lots of fun little games.
 
-## Getting Started
-1. Clone this repository or use the "Use this template" button on GitHub to quickly set up your own repository based on this template
-2. `App/` and `Core/` are the two projects - you can edit the names of these folders and their contents to suit
-3. The three included Premake build files are `Build.lua`, `Core/Build-Core.lua` and `App/Build-App.lua` - you can edit these to customise your build configurations, edit the names of your projects and workspace/solution, etc.
-4. Open the `Scripts/` directory and run the appropriate `Setup` script to generate projects files. You can edit the setup scripts to change the type of project that is generated - out of the box they are set to Visual Studio 2022 for Windows and gmake2 for Linux.
+My eldest isn't quite ready to get started so I have a little time to get things working, you know, display sprites, have them respond, you know, the ability to make a game.
 
-Note that no macOS setup script is currently provided; you can duplicate the Linux script and adjust accordingly.
+This project is purely a hobby, I've absolutely no intention in it ever being anything other than a fun little project for me and my kids, however, if you see I'm doing something stupid, please advise, or if you want to use it, go ahead. Any help and advise is appreciated, I've been coding for over 20 years but I'm very new to C++.
 
-## Included
-- Some example code (in `App/Source` and `Core/Source`) to provide a starting point and test
-- Simple `.gitignore` to ignore project files and binaries
-- Premake binaries for Win/Mac/Linux (`v5.0-beta2`)
+I've included a [premake](https://github.com/premake) script to setup the solution for Visual Studio, I'll work on updating the [premake](https://github.com/premake) script for OSX when I feel like moving the project over to my Mac.
 
-## License
-- UNLICENSE for this repository (see `UNLICENSE.txt` for more details)
-- Premake is licensed under BSD 3-Clause (see included LICENSE.txt file for more details)
+## Project Dependencies
+
+I am and will be using the following to create Prune2D, this list is subject to change as I get more knowledgable with the C++ ecosystem.
+
+- SDL
+- entt
+- glm
+- lua
+- imgui
+- sol
+- spdlog
+
+..and whatever else makes my life simpler.
+
+## Current Features
+
+To date, the features are limited, I'll try to keep this list updated, excuse the obvious features (Create a window :)), they were all a challenge to add so I'm going to leave the dumb ones here until the list is bigger and I can remove them.
+
+- Create a Window via SDL
+- Enitity component system via entt
+- Display sprites and optionally animate them with sprite sheets
+- Movement, well, a velocity component and movement system
+- AABB collision system via BoxColliderComponent and CollisionSystem
+- Events, currently used by the CollisionSystem and HealthSystem, CollisionSystem emits a CollisionEvent picked up by the HealthSystem
+- Debug toggle to display box colliders
+- Logging via spdlog
+- Sprite library
+- Clear project structure, engine code in src/Engine, base code in src/, game code should reside in src/Game
+
+## Missing features
+
+The ability to create a game, including but not limited to....
+
+- An example game
+- Render backgrounds
+- Render UI
+- Music and Sound effects
+- Game settings
+- Game editor
+- Do anything with user input other than exit

@@ -1,8 +1,8 @@
-#include "Core.h"
+#include "Prune.h"
 
 #include <iostream>
 
-namespace Core {
+namespace Prune {
 
 	void PrintHelloWorld()
 	{

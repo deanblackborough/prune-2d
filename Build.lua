@@ -1,8 +1,7 @@
--- premake5.lua
-workspace "New Project"
+workspace "Prune 2D"
    architecture "x64"
    configurations { "Debug", "Release", "Dist" }
-   startproject "App"
+   startproject "Game"
 
    -- Workspace-wide build options for MSVC
    filter "system:windows"
@@ -10,8 +9,8 @@ workspace "New Project"
 
 OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 
-group "Core"
-	include "Core/Build-Core.lua"
+group "Prune"
+	include "Engine/Build-Engine.lua"
 group ""
 
-include "App/Build-App.lua"
+include "Game/Build-Game.lua"
