@@ -9,8 +9,32 @@ project "Engine"
 
    includedirs
    {
-      "Source"
+       "Source",
+       "../Vendor/glm",
+       "../Vendor/imgui",
+       "../Vendor/sol",
+       "../Vendor/sdl/include",
+       "../Vendor/lua",
+       "../Vendor/spdlog/include",
+       "../Vendor/entt/include"
    }
+
+   libdirs
+   {
+       "../Vendor/sdl/lib/x64",
+       "../Vendor/lua/lib"
+   }
+    
+   links 
+   {
+       "SDL2.lib",
+       "SDL2main.lib",
+       "SDL2_image.lib",
+       "SDL2_mixer.lib",
+       "SDL2_ttf.lib"
+   }
+    
+   linkoptions "liblua53.a"
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
