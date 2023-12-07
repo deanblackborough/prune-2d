@@ -108,6 +108,12 @@ void Game::CreateEntities()
     m_Registry.emplace<Prune::VelocityComponent>(plane_green, glm::vec2(-250, 0));
     m_Registry.emplace<Prune::SpriteComponent>(plane_green, "plane-green-left", 32, 32, 0, 0, 128, 128);
     m_Registry.emplace<Prune::BoxColliderComponent>(plane_green, glm::vec2(32, 32));
+
+    entt::entity player = m_Registry.create();
+    m_Registry.emplace<Prune::TransformComponent>(player, glm::vec2((400), (400)), glm::vec2(1, 1));
+    m_Registry.emplace<Prune::SpriteComponent>(player, "player-idle", 200, 200, 0, 0, 200, 200);
+    m_Registry.emplace<Prune::AnimatedSpriteComponent>(player, 1, 4, 8);
+    m_Registry.emplace<Prune::BoxColliderComponent>(player, glm::vec2(200, 200));
 }
 
 void Game::AddSpritesToLibrary()
@@ -115,6 +121,7 @@ void Game::AddSpritesToLibrary()
     m_SpriteLibrary.SetRenderer(m_Renderer);
     m_SpriteLibrary.AddSprite("plane-grey-right", "Assets\\Sprites\\plane-grey-right.png");
     m_SpriteLibrary.AddSprite("plane-green-left", "Assets\\Sprites\\plane-green-left.png");
+    m_SpriteLibrary.AddSprite("player-idle", "Assets\\Sprites\\player-idle.png");
 }
 
 void Game::RunSystems(double delta)
