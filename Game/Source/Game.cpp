@@ -1,12 +1,15 @@
 #include "Game.h"
 #include <Prune/Component/AnimatedSpriteComponent.h>
+#include <Prune/Component/BoxColliderComponent.h>
+#include <Prune/Component/KeyPressComponent.h>
 #include <Prune/Component/SpriteComponent.h>
 #include <Prune/Component/TransformComponent.h>
-#include <Prune/Component/BoxColliderComponent.h>
 #include <Prune/Component/VelocityComponent.h>
+#include <Prune/Event/KeyPressEvent.h>
 #include <Prune/System/Update/AnimatedSpriteSystem.h>
 #include <Prune/System/Update/CollisionSystem.h>
 #include <Prune/System/Update/HealthSystem.h>
+#include <Prune/System/Update/KeyPressSystem.h>
 #include <Prune/System/Update/MovementSystem.h>
 #include <Prune/System/Render/BoxColliderRenderSystem.h>
 #include <Prune/System/Render/SpriteRenderSystem.h>
@@ -34,13 +37,14 @@ void Game::Run()
 
     while (m_IsRunning)
     {
-        Uint32 frameStartTime = SDL_GetTicks();
 
+        Uint32 frameStartTime = SDL_GetTicks();
+        
         CaptureInputEvents();
 
-        double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
-
         m_EventBus->Reset();
+        
+        double deltaTime = (frameStartTime - frameEndTime) / 1000.f;
 
         RunSystems(deltaTime);
 
@@ -70,16 +74,14 @@ void Game::CaptureInputEvents()
             break;
 
         case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_ESCAPE:
+            if (event.key.keysym.sym == SDLK_ESCAPE) {
                 m_IsRunning = false;
-                break;
-            case SDLK_d:
+            }
+            if (event.key.keysym.sym == SDLK_d) {
                 m_ShowBoxColliders2D = !m_ShowBoxColliders2D;
-                break;
             }
 
+            m_EventBus->EmitEvent<Prune::KeyPressEvent>(m_Registry, event.key.keysym.sym);
             break;
         }
     }
@@ -111,9 +113,11 @@ void Game::CreateEntities()
 
     entt::entity player = m_Registry.create();
     m_Registry.emplace<Prune::TransformComponent>(player, glm::vec2((400), (400)), glm::vec2(1, 1));
+    m_Registry.emplace<Prune::VelocityComponent>(player, glm::vec2(75, 0));
     m_Registry.emplace<Prune::SpriteComponent>(player, "player-idle", 200, 200, 0, 0, 200, 200);
     m_Registry.emplace<Prune::AnimatedSpriteComponent>(player, 1, 4, 8);
     m_Registry.emplace<Prune::BoxColliderComponent>(player, glm::vec2(200, 200));
+    m_Registry.emplace<Prune::KeyPressComponent>(player, glm::vec2(0, -75), glm::vec2(75, 0), glm::vec2(0, 75), glm::vec2(-75, 0));
 }
 
 void Game::AddSpritesToLibrary()
@@ -128,6 +132,9 @@ void Game::RunSystems(double delta)
 {
     Prune::HealthSystem damageSystem = Prune::HealthSystem();
     damageSystem.SubscribeToEvents(m_EventBus);
+
+    Prune::KeyPressSystem keyPressSystem = Prune::KeyPressSystem();
+    keyPressSystem.SubscribeToEvents(m_EventBus);
 
     Prune::MovementSystem movementSystem = Prune::MovementSystem();
     movementSystem.Update(m_Registry, delta);
