@@ -1,6 +1,6 @@
 #include "KeyPressSystem.h"
 #include "../../Component/KeyPressComponent.h"
-#include "../../Component/VelocityComponent.h"
+#include "../../Component/RigidBodyComponent.h"
 #include "../../../Log/Log.h"
 
 void Prune::KeyPressSystem::SubscribeToEvents(std::unique_ptr<EventBus>& eventBus)
@@ -10,11 +10,11 @@ void Prune::KeyPressSystem::SubscribeToEvents(std::unique_ptr<EventBus>& eventBu
 
 void Prune::KeyPressSystem::OnKeyPress(KeyPressEvent& event)
 {
-    auto view = event.registry.view<KeyPressComponent, VelocityComponent>();
+    auto view = event.registry.view<KeyPressComponent, RigidBodyComponent>();
 
     for (auto entity : view) {
         const KeyPressComponent& keyPressComponent = view.get<KeyPressComponent>(entity);
-        VelocityComponent& velocityComponent = view.get<VelocityComponent>(entity);
+        RigidBodyComponent& velocityComponent = view.get<RigidBodyComponent>(entity);
 
         switch (event.symbol)
         {

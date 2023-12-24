@@ -4,7 +4,7 @@
 #include <Prune/Component/KeyPressComponent.h>
 #include <Prune/Component/SpriteComponent.h>
 #include <Prune/Component/TransformComponent.h>
-#include <Prune/Component/VelocityComponent.h>
+#include <Prune/Component/RigidBodyComponent.h>
 #include <Prune/Event/KeyPressEvent.h>
 #include <Prune/System/Update/AnimatedSpriteSystem.h>
 #include <Prune/System/Update/CollisionSystem.h>
@@ -101,19 +101,19 @@ void Game::CreateEntities()
 {
     entt::entity plane_grey = m_Registry.create();
     m_Registry.emplace<Prune::TransformComponent>(plane_grey, glm::vec2(10, (300 - 16)), glm::vec2(1, 1));
-    m_Registry.emplace<Prune::VelocityComponent>(plane_grey, glm::vec2(100, 0));
+    m_Registry.emplace<Prune::RigidBodyComponent>(plane_grey, glm::vec2(90, 0));
     m_Registry.emplace<Prune::SpriteComponent>(plane_grey, "plane-grey-right", 32, 32, 0, 0, 128, 128);
     m_Registry.emplace<Prune::BoxColliderComponent>(plane_grey, glm::vec2(32, 32));
 
     entt::entity plane_green = m_Registry.create();
     m_Registry.emplace<Prune::TransformComponent>(plane_green, glm::vec2((800 - 10 - 32), (300 - 16)), glm::vec2(1, 1));
-    m_Registry.emplace<Prune::VelocityComponent>(plane_green, glm::vec2(-250, 0));
+    m_Registry.emplace<Prune::RigidBodyComponent>(plane_green, glm::vec2(-250, 0));
     m_Registry.emplace<Prune::SpriteComponent>(plane_green, "plane-green-left", 32, 32, 0, 0, 128, 128);
     m_Registry.emplace<Prune::BoxColliderComponent>(plane_green, glm::vec2(32, 32));
 
     entt::entity player = m_Registry.create();
     m_Registry.emplace<Prune::TransformComponent>(player, glm::vec2((400), (400)), glm::vec2(1, 1));
-    m_Registry.emplace<Prune::VelocityComponent>(player, glm::vec2(75, 0));
+    m_Registry.emplace<Prune::RigidBodyComponent>(player, glm::vec2(0, 0));
     m_Registry.emplace<Prune::SpriteComponent>(player, "player-idle", 200, 200, 0, 0, 200, 200);
     m_Registry.emplace<Prune::AnimatedSpriteComponent>(player, 1, 4, 8);
     m_Registry.emplace<Prune::BoxColliderComponent>(player, glm::vec2(200, 200));

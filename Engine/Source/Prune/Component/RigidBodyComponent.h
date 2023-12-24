@@ -10,7 +10,7 @@ namespace Prune
      *
      * @param velocity A glm::vec2 for the x and y velocity
      */
-    struct VelocityComponent
+    struct RigidBodyComponent
     {
     public:
         glm::vec2 velocity = glm::vec2(0, 0);
