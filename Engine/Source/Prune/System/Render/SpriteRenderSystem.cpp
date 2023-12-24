@@ -32,7 +32,7 @@ void Prune::SpriteRenderSystem::Render(
                 &destinationRectangle,
                 transformComponent.rotation,
                 NULL,
-                SDL_FLIP_NONE
+                spriteComponent.flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE
             );
         }
         else

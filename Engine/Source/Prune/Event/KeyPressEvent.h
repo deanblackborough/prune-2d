@@ -11,8 +11,13 @@ namespace Prune
     public:
         entt::registry& registry;
         SDL_Keycode symbol;
+        bool held;
 
-        KeyPressEvent(entt::registry& registry, SDL_Keycode symbol) : registry(registry), symbol(symbol)
+        KeyPressEvent(
+            entt::registry& registry, 
+            SDL_Keycode symbol, 
+            bool held = false
+        ) : registry(registry), symbol(symbol), held(held)
         {
         }
 

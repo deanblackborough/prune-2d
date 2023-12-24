@@ -27,6 +27,7 @@ namespace Prune
         int sourceRectWidth;
         int sourceRectHeight;
         SDL_Rect sourceRect;
+        bool flipHorizontal = false;
 
         SpriteComponent(
             std::string spriteId,
@@ -35,7 +36,8 @@ namespace Prune
             int sourceRectX = 0,
             int sourceRectY = 0,
             int sourceRectWidth = 64,
-            int sourceRectHeight = 64
+            int sourceRectHeight = 64,
+            bool flipHorizontal = false
         )
         {
             this->spriteId = spriteId;
@@ -46,6 +48,7 @@ namespace Prune
             this->sourceRectWidth = sourceRectWidth;
             this->sourceRectHeight = sourceRectHeight;
             this->sourceRect = { sourceRectX, sourceRectY, sourceRectWidth, sourceRectHeight };
+            this->flipHorizontal = flipHorizontal;
         }
     };
 }

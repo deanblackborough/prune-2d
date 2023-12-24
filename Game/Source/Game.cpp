@@ -81,7 +81,9 @@ void Game::CaptureInputEvents()
                 m_ShowBoxColliders2D = !m_ShowBoxColliders2D;
             }
 
-            m_EventBus->EmitEvent<Prune::KeyPressEvent>(m_Registry, event.key.keysym.sym);
+            if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_RIGHT) {
+                m_EventBus->EmitEvent<Prune::KeyPressEvent>(m_Registry, event.key.keysym.sym, true);
+            }
             break;
         }
     }
@@ -118,6 +120,16 @@ void Game::CreateEntities()
     m_Registry.emplace<Prune::AnimatedSpriteComponent>(player, 1, 4, 8);
     m_Registry.emplace<Prune::BoxColliderComponent>(player, glm::vec2(200, 200));
     m_Registry.emplace<Prune::KeyPressComponent>(player, glm::vec2(0, -75), glm::vec2(75, 0), glm::vec2(0, 75), glm::vec2(-75, 0));
+
+    for (size_t i = 0; i < 32; i++)
+    {
+        int offset = i * 32;
+
+        entt::entity level = m_Registry.create();
+        m_Registry.emplace<Prune::TransformComponent>(level, glm::vec2(100 + offset, 532), glm::vec2(1, 1));
+        m_Registry.emplace<Prune::RigidBodyComponent>(level, glm::vec2(0, 0));
+        m_Registry.emplace<Prune::SpriteComponent>(level, "map-tileset", 32, 32, 0, 0, 64, 64);
+    }
 }
 
 void Game::AddSpritesToLibrary()
@@ -126,6 +138,7 @@ void Game::AddSpritesToLibrary()
     m_SpriteLibrary.AddSprite("plane-grey-right", "Assets\\Sprites\\plane-grey-right.png");
     m_SpriteLibrary.AddSprite("plane-green-left", "Assets\\Sprites\\plane-green-left.png");
     m_SpriteLibrary.AddSprite("player-idle", "Assets\\Sprites\\player-idle.png");
+    m_SpriteLibrary.AddSprite("map-tileset", "Assets\\Sprites\\map-tileset.png");
 }
 
 void Game::RunSystems(double delta)
