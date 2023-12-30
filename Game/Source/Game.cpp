@@ -85,6 +85,11 @@ void Game::CaptureInputEvents()
                 m_EventBus->EmitEvent<Prune::KeyPressEvent>(m_Registry, event.key.keysym.sym, true);
             }
             break;
+        case SDL_KEYUP:
+            if (event.key.keysym.sym == SDLK_LEFT || event.key.keysym.sym == SDLK_RIGHT) {
+                m_EventBus->EmitEvent<Prune::KeyPressEvent>(m_Registry, event.key.keysym.sym, false);
+            }
+            break;
         }
     }
 }
@@ -119,7 +124,7 @@ void Game::CreateEntities()
     m_Registry.emplace<Prune::SpriteComponent>(player, "player-idle", 200, 200, 0, 0, 200, 200);
     m_Registry.emplace<Prune::AnimatedSpriteComponent>(player, 1, 4, 8);
     m_Registry.emplace<Prune::BoxColliderComponent>(player, glm::vec2(200, 200));
-    m_Registry.emplace<Prune::KeyPressComponent>(player, glm::vec2(0, -75), glm::vec2(75, 0), glm::vec2(0, 75), glm::vec2(-75, 0));
+    m_Registry.emplace<Prune::KeyPressComponent>(player, glm::vec2(0, -75), glm::vec2(150, 0), glm::vec2(0, 75), glm::vec2(-150, 0));
 
     for (size_t i = 0; i < 32; i++)
     {

@@ -30,10 +30,6 @@ void Prune::KeyPressSystem::OnKeyPress(KeyPressEvent& event)
                     rigidBodyComponent.velocity = glm::vec2(0, 0);
                 }
                 break;
-            case SDLK_DOWN:
-                PRUNE_LOG_INFO("Set the down velocity");
-                rigidBodyComponent.velocity = keyPressComponent.downVelocity;
-                break;
             case SDLK_LEFT:
                 PRUNE_LOG_INFO("Set the left velocity");
                 if (event.held) {
